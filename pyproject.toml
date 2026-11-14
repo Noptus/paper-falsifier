@@ -1,6 +1,6 @@
 [project]
 name = "paper-falsifier"
-version = "0.1.0"
+version = "0.1.1"
 description = "Scoped, reviewable applicability tests for numerical ML papers"
 readme = "README.md"
 requires-python = ">=3.11"

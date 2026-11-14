@@ -77,7 +77,7 @@ def protocol():
         "claim": "For the synthetic fixtures, select the NLL-optimal positive temperature on the fixed validation grid and produce the expected held-out softmax probabilities without changing predicted labels.",
         "scope": "Synthetic logits and an explicitly fixed temperature grid [0.5, 1, 2, 4, 8]. This checks numerical behavior and split discipline. It uses neither the original trained models nor their datasets, and cannot estimate out-of-sample calibration gains.",
         "references": [
-            {"location": "§4.2, Temperature scaling (PDF page 5)",
+            {"location": "§4.2, Temperature scaling, Eq. (9) (PDF page 6)",
              "source_claim": "A scalar positive temperature divides all logits. Fit it on validation negative log likelihood and apply it on test logits. Positive scaling preserves the predicted class."},
         ],
         "cases": controls,

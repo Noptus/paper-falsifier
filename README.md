@@ -23,10 +23,10 @@ Repeat with `$example/negative-control.wat`. It should report mismatches and exi
 
 | Paper | Scoped test | Evidence |
 | --- | --- | --- |
-| [Guo et al., ICML 2017](https://arxiv.org/abs/1706.04599v2) | Fixed-grid temperature scaling on synthetic logits | [Candidate](examples/temperature-scaling/result.json) · [Negative control](examples/temperature-scaling/negative-result.json) |
-| [Angelopoulos and Bates, 2022 preprint](https://arxiv.org/abs/2107.07511v6) | Split-conformal rank correction for precomputed calibration residuals | [Candidate](examples/split-conformal/result.json) · [Negative control](examples/split-conformal/negative-result.json) |
+| [Guo et al., ICML 2017](https://arxiv.org/abs/1706.04599v2) | [Fixed-grid temperature scaling on synthetic logits](examples/temperature-scaling/) | [Candidate](examples/temperature-scaling/result.json) · [Negative control](examples/temperature-scaling/negative-result.json) |
+| [Angelopoulos and Bates, 2022 preprint](https://arxiv.org/abs/2107.07511v6) | [Split-conformal rank correction for precomputed calibration residuals](examples/split-conformal/) | [Candidate](examples/split-conformal/result.json) · [Negative control](examples/split-conformal/negative-result.json) |
 
-Both directories contain the frozen protocol, an independent Python oracle, an original WebAssembly guest, a deliberate defect and pinned source metadata. Use the matching arXiv URL and example directory in the commands above to reproduce either run. Large third-party files are retrieved on demand.
+Each example has its own replay commands, frozen protocol, independent Python oracle, original WebAssembly guest, deliberate defect and pinned source metadata. Large third-party files are retrieved on demand.
 
 ## Give the skill an arXiv link
 

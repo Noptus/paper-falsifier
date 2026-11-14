@@ -11,11 +11,11 @@
   "scope": "Synthetic logits and an explicitly fixed temperature grid [0.5, 1, 2, 4, 8]. This checks numerical behavior and split discipline. It uses neither the original trained models nor their datasets, and cannot estimate out-of-sample calibration gains.",
   "references": [
     {
-      "location": "§4.2, Temperature scaling (PDF page 5)",
+      "location": "§4.2, Temperature scaling, Eq. (9) (PDF page 6)",
       "source_claim": "A scalar positive temperature divides all logits. Fit it on validation negative log likelihood and apply it on test logits. Positive scaling preserves the predicted class."
     }
   ],
-  "protocol_sha256": "5b2b21dadffb86fc56d3b2b19f6810e8dc2f9dcf2e3ee74471179a1fd7444f8f",
+  "protocol_sha256": "7e4788d99d75c5b973667cf144b52d25d90159e42afb3775f458e0e584b72f37",
   "candidate_sha256": "fcfe14ed9fdc7c2c94467760ced813e3da1faa97e8b137f9e482ef8f92954d80",
   "case_count": 6,
   "results": [
