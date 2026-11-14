@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "status": "fail",
+  "mode": "applicability",
+  "paper": {
+    "identifier": "2107.07511v6",
+    "title": "A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification",
+    "pdf_sha256": "c69aa191d8363c25b36685db4adb7e6980e55ee39892fd3626206c16e1e0efa1"
+  },
+  "claim": "For the synthetic absolute-residual fixtures, return the finite-sample corrected split-conformal order statistic and the corresponding symmetric prediction intervals.",
+  "scope": "This isolates the rank calculation for absolute-error scores and held-out predictions. An unattainable finite rank produces the full real line, encoded as [found=0, rank, zero endpoint placeholders]. The benchmark does not estimate population coverage or test exchangeability.",
+  "references": [
+    {
+      "location": "§1.1 steps 3–4, Eq. (2), and Theorem 1 (PDF pages 5–6)",
+      "source_claim": "The calibration threshold uses the finite-sample-adjusted quantile. Form the prediction set of outputs whose scores do not exceed that threshold."
+    }
+  ],
+  "protocol_sha256": "cfa001957be9aa75f8092b612b814a1155cac449030717abae03b6e3c60f447c",
+  "candidate_sha256": "aba05ce7abf256d04c799cc9080d996e43ee551d59c01cf35031f3787368dcd1",
+  "case_count": 7,
+  "results": [
+    {
+      "name": "rank-correction-vs-empirical-quantile",
+      "status": "fail",
+      "expected_count": 6,
+      "actual_count": 6,
+      "mismatched_indices": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "actual": [
+        1.0,
+        2.0,
+        8.0,
+        12.0,
+        -2.25,
+        1.75
+      ]
+    },
+    {
+      "name": "permutation-invariant",
+      "status": "fail",
+      "expected_count": 6,
+      "actual_count": 6,
+      "mismatched_indices": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "actual": [
+        1.0,
+        2.0,
+        8.0,
+        12.0,
+        -2.25,
+        1.75
+      ]
+    },
+    {
+      "name": "ties-and-multiple-predictions",
+      "status": "fail",
+      "expected_count": 8,
+      "actual_count": 8,
+      "mismatched_indices": [
+        1
+      ],
+      "actual": [
+        1.0,
+        2.0,
+        -9.5,
+        -8.5,
+        -0.5,
+        0.5,
+        1.5,
+        2.5
+      ]
+    },
+    {
+      "name": "rank-at-upper-finite-boundary",
+      "status": "pass",
+      "expected_count": 6,
+      "actual_count": 6,
+      "mismatched_indices": [],
+      "actual": [
+        1.0,
+        4.0,
+        -8.0,
+        8.0,
+        -11.0,
+        5.0
+      ]
+    },
+    {
+      "name": "rank-n-plus-one-is-unbounded",
+      "status": "fail",
+      "expected_count": 6,
+      "actual_count": 6,
+      "mismatched_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "actual": [
+        1.0,
+        4.0,
+        1.6,
+        2.4,
+        2.6,
+        3.4
+      ]
+    },
+    {
+      "name": "zero-radius",
+      "status": "fail",
+      "expected_count": 6,
+      "actual_count": 6,
+      "mismatched_indices": [
+        1
+      ],
+      "actual": [
+        1.0,
+        2.0,
+        7.125,
+        7.125,
+        -5.125,
+        -5.125
+      ]
+    },
+    {
+      "name": "tiny-calibration-set",
+      "status": "pass",
+      "expected_count": 4,
+      "actual_count": 4,
+      "mismatched_indices": [],
+      "actual": [
+        1.0,
+        1.0,
+        -1.75,
+        2.75
+      ]
+    }
+  ],
+  "source_pdf_verified": true
+}

@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "paper": {
+    "identifier": "2107.07511v6",
+    "title": "A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification",
+    "pdf_sha256": "c69aa191d8363c25b36685db4adb7e6980e55ee39892fd3626206c16e1e0efa1"
+  },
+  "mode": "applicability",
+  "claim": "For the synthetic absolute-residual fixtures, return the finite-sample corrected split-conformal order statistic and the corresponding symmetric prediction intervals.",
+  "scope": "This isolates the rank calculation for absolute-error scores and held-out predictions. An unattainable finite rank produces the full real line, encoded as [found=0, rank, zero endpoint placeholders]. The benchmark does not estimate population coverage or test exchangeability.",
+  "references": [
+    {
+      "location": "§1.1 steps 3–4, Eq. (2), and Theorem 1 (PDF pages 5–6)",
+      "source_claim": "The calibration threshold uses the finite-sample-adjusted quantile. Form the prediction set of outputs whose scores do not exceed that threshold."
+    }
+  ],
+  "cases": [
+    {
+      "name": "rank-correction-vs-empirical-quantile",
+      "inputs": [
+        4,
+        1,
+        2,
+        2,
+        4,
+        1,
+        3,
+        2,
+        10,
+        -0.25
+      ],
+      "expected": [
+        1,
+        3,
+        7,
+        13,
+        -3.25,
+        2.75
+      ],
+      "atol": 1e-12,
+      "rtol": 1e-12
+    },
+    {
+      "name": "permutation-invariant",
+      "inputs": [
+        4,
+        1,
+        2,
+        2,
+        2,
+        4,
+        1,
+        3,
+        10,
+        -0.25
+      ],
+      "expected": [
+        1,
+        3,
+        7,
+        13,
+        -3.25,
+        2.75
+      ],
+      "atol": 1e-12,
+      "rtol": 1e-12
+    },
+    {
+      "name": "ties-and-multiple-predictions",
+      "inputs": [
+        5,
+        2,
+        5,
+        3,
+        0.5,
+        3,
+        0.5,
+        1,
+        0.5,
+        -9,
+        0,
+        2
+      ],
+      "expected": [
+        1,
+        3,
+        -9.5,
+        -8.5,
+        -0.5,
+        0.5,
+        1.5,
+        2.5
+      ],
+      "atol": 1e-12,
+      "rtol": 1e-12
+    },
+    {
+      "name": "rank-at-upper-finite-boundary",
+      "inputs": [
+        4,
+        4,
+        5,
+        2,
+        1,
+        8,
+        3,
+        2,
+        0,
+        -3
+      ],
+      "expected": [
+        1,
+        4,
+        -8,
+        8,
+        -11,
+        5
+      ],
+      "atol": 1e-12,
+      "rtol": 1e-12
+    },
+    {
+      "name": "rank-n-plus-one-is-unbounded",
+      "inputs": [
+        4,
+        9,
+        10,
+        2,
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        2,
+        3
+      ],
+      "expected": [
+        0,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "atol": 1e-12,
+      "rtol": 1e-12
+    },
+    {
+      "name": "zero-radius",
+      "inputs": [
+        4,
+        1,
+        2,
+        2,
+        0,
+        0,
+        5,
+        0,
+        7.125,
+        -5.125
+      ],
+      "expected": [
+        1,
+        3,
+        7.125,
+        7.125,
+        -5.125,
+        -5.125
+      ],
+      "atol": 1e-12,
+      "rtol": 1e-12
+    },
+    {
+      "name": "tiny-calibration-set",
+      "inputs": [
+        1,
+        1,
+        2,
+        1,
+        2.25,
+        0.5
+      ],
+      "expected": [
+        1,
+        1,
+        -1.75,
+        2.75
+      ],
+      "atol": 1e-12,
+      "rtol": 1e-12
+    }
+  ]
+}

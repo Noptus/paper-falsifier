@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "mode": "applicability",
+  "paper": {
+    "identifier": "1706.04599v2",
+    "title": "On Calibration of Modern Neural Networks",
+    "pdf_sha256": "cb654a65acb785ed4387d6c2db1301d065075dddc2d363676836a2f2a14bc50d"
+  },
+  "claim": "For the synthetic fixtures, select the NLL-optimal positive temperature on the fixed validation grid and produce the expected held-out softmax probabilities without changing predicted labels.",
+  "scope": "Synthetic logits and an explicitly fixed temperature grid [0.5, 1, 2, 4, 8]. This checks numerical behavior and split discipline. It uses neither the original trained models nor their datasets, and cannot estimate out-of-sample calibration gains.",
+  "references": [
+    {
+      "location": "§4.2, Temperature scaling (PDF page 5)",
+      "source_claim": "A scalar positive temperature divides all logits. Fit it on validation negative log likelihood and apply it on test logits. Positive scaling preserves the predicted class."
+    }
+  ],
+  "protocol_sha256": "5b2b21dadffb86fc56d3b2b19f6810e8dc2f9dcf2e3ee74471179a1fd7444f8f",
+  "candidate_sha256": "fcfe14ed9fdc7c2c94467760ced813e3da1faa97e8b137f9e482ef8f92954d80",
+  "case_count": 6,
+  "results": [
+    {
+      "name": "overconfident-multiclass",
+      "status": "pass",
+      "expected_count": 10,
+      "actual_count": 10,
+      "mismatched_indices": [],
+      "actual": [
+        2.0,
+        0.9425994054266799,
+        0.04692926104148596,
+        0.01047133353183423,
+        0.16379833573785438,
+        0.004365077792611125,
+        0.8318365864695345,
+        0.06337893833303758,
+        0.4683105308334813,
+        0.4683105308334813
+      ]
+    },
+    {
+      "name": "row-shifts-invariant",
+      "status": "pass",
+      "expected_count": 10,
+      "actual_count": 10,
+      "mismatched_indices": [],
+      "actual": [
+        2.0,
+        0.9425994054266799,
+        0.04692926104148596,
+        0.01047133353183423,
+        0.16379833573785438,
+        0.004365077792611125,
+        0.8318365864695345,
+        0.06337893833303758,
+        0.4683105308334813,
+        0.4683105308334813
+      ]
+    },
+    {
+      "name": "confident-correct-fit",
+      "status": "pass",
+      "expected_count": 5,
+      "actual_count": 5,
+      "mismatched_indices": [],
+      "actual": [
+        0.5,
+        0.8807970779778825,
+        0.11920292202211748,
+        0.0066928509242848615,
+        0.9933071490757153
+      ]
+    },
+    {
+      "name": "equal-fit-loss-tie-break",
+      "status": "pass",
+      "expected_count": 7,
+      "actual_count": 7,
+      "mismatched_indices": [],
+      "actual": [
+        0.5,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.9971936827749125,
+        0.00033452121335145494,
+        0.002471796011736251
+      ]
+    },
+    {
+      "name": "test-split-does-not-change-fit",
+      "status": "pass",
+      "expected_count": 4,
+      "actual_count": 4,
+      "mismatched_indices": [],
+      "actual": [
+        2.0,
+        0.05842828462328645,
+        0.02759956739007266,
+        0.913972147986641
+      ]
+    },
+    {
+      "name": "four-class-calibration",
+      "status": "pass",
+      "expected_count": 9,
+      "actual_count": 9,
+      "mismatched_indices": [],
+      "actual": [
+        2.0,
+        0.4550542339234114,
+        0.27600434470659363,
+        0.1674050972784433,
+        0.10153632409155178,
+        0.0014683373414480568,
+        0.9766522971507794,
+        0.003991354713306136,
+        0.01788801079446636
+      ]
+    }
+  ],
+  "source_pdf_verified": true
+}

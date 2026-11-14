@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ubuntu-latest, macos-latest]
+        python: ['3.11', '3.13']
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install .
+      - run: python -m unittest discover -s tests -v
+      - name: Reproduce the paper examples
+        shell: bash
+        run: |
+          for example in examples/temperature-scaling examples/split-conformal; do
+            protocol_sha=$(paper-falsifier freeze "$example/protocol.json")
+            test "$protocol_sha" = "$(cat "$example/protocol.sha256")"
+            paper-falsifier run "$example/protocol.json" "$example/candidate.wat" --expect-sha "$protocol_sha"
+            code=0
+            paper-falsifier run "$example/protocol.json" "$example/negative-control.wat" --expect-sha "$protocol_sha" || code=$?
+            test "$code" = 1
+          done

@@ -1,0 +1,53 @@
+(module
+  (memory (export "memory") 1 1)
+  ;; Deliberately use the raw empirical quantile ceil(n*p/q), dropping +1.
+  (func $load (param $in i32) (param $i i32) (result f64)
+    local.get $in local.get $i i32.const 3 i32.shl i32.add f64.load)
+  (func $store (param $out i32) (param $i i32) (param $v f64)
+    local.get $out local.get $i i32.const 3 i32.shl i32.add local.get $v f64.store)
+  (func (export "solve") (param $in i32) (param $count i32) (param $out i32)
+        (param $cap i32) (result i32)
+    (local $n i32) (local $p i32) (local $q i32) (local $m i32)
+    (local $rank i32) (local $i i32) (local $j i32) (local $lt i32)
+    (local $v f64) (local $w f64) (local $radius f64) (local $test f64)
+    (local.set $n (i32.trunc_f64_u (call $load (local.get $in) (i32.const 0))))
+    (local.set $p (i32.trunc_f64_u (call $load (local.get $in) (i32.const 1))))
+    (local.set $q (i32.trunc_f64_u (call $load (local.get $in) (i32.const 2))))
+    (local.set $m (i32.trunc_f64_u (call $load (local.get $in) (i32.const 3))))
+    (local.set $rank (i32.div_u
+      (i32.sub (i32.add (i32.mul (local.get $n) (local.get $p)) (local.get $q)) (i32.const 1))
+      (local.get $q)))
+    (block $rank_done
+      (loop $scores
+        (br_if $rank_done (i32.ge_u (local.get $i) (local.get $n)))
+        (local.set $v (call $load (local.get $in) (i32.add (local.get $i) (i32.const 4))))
+        (local.set $j (i32.const 0))
+        (local.set $lt (i32.const 0))
+        (block $count_done
+          (loop $count_lower
+            (br_if $count_done (i32.ge_u (local.get $j) (local.get $n)))
+            (local.set $w (call $load (local.get $in) (i32.add (local.get $j) (i32.const 4))))
+            (if (i32.or (f64.lt (local.get $w) (local.get $v))
+                  (i32.and (f64.eq (local.get $w) (local.get $v)) (i32.lt_u (local.get $j) (local.get $i))))
+              (then (local.set $lt (i32.add (local.get $lt) (i32.const 1)))))
+            (local.set $j (i32.add (local.get $j) (i32.const 1)))
+            (br $count_lower)))
+        (if (i32.eq (local.get $rank) (i32.add (local.get $lt) (i32.const 1)))
+          (then (local.set $radius (local.get $v)) (br $rank_done)))
+        (local.set $i (i32.add (local.get $i) (i32.const 1)))
+        (br $scores)))
+    (call $store (local.get $out) (i32.const 0) (f64.const 1))
+    (call $store (local.get $out) (i32.const 1) (f64.convert_i32_u (local.get $rank)))
+    (local.set $i (i32.const 0))
+    (block $test_done
+      (loop $tests
+        (br_if $test_done (i32.ge_u (local.get $i) (local.get $m)))
+        (local.set $test (call $load (local.get $in)
+          (i32.add (i32.add (local.get $i) (local.get $n)) (i32.const 4))))
+        (local.set $j (i32.add (i32.shl (local.get $i) (i32.const 1)) (i32.const 2)))
+        (call $store (local.get $out) (local.get $j) (f64.sub (local.get $test) (local.get $radius)))
+        (call $store (local.get $out) (i32.add (local.get $j) (i32.const 1))
+          (f64.add (local.get $test) (local.get $radius)))
+        (local.set $i (i32.add (local.get $i) (i32.const 1)))
+        (br $tests)))
+    local.get $cap))
