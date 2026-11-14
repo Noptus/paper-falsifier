@@ -6,10 +6,11 @@ import math
 import sys
 from pathlib import Path
 
-from .arxiv import SourceError, fetch
+from .arxiv import SourceError, arxiv_id, fetch
 from .protocol import ProtocolError, read_protocol, verify_paper
 from .report import evaluate
 from .runner import RunnerError
+from .workspace import implementation_brief, init_study, seal_study, study_status, verify_study
 
 
 def _json(record: dict) -> str:
@@ -50,6 +51,23 @@ def run(args) -> int:
     return {"pass": 0, "fail": 1, "error": 2}[report["status"]]
 
 
+def study(args) -> int:
+    if args.stage == "new":
+        directory = args.directory or Path("studies") / arxiv_id(args.reference).replace("/", "-")
+        result = init_study(args.reference, directory)
+    elif args.stage == "seal":
+        result = seal_study(args.directory, tuple(args.artifact))
+    elif args.stage == "brief":
+        result = implementation_brief(args.directory, expected_seal=args.expect_seal)
+    elif args.stage == "verify":
+        result = verify_study(args.directory, timeout=args.timeout, expected_seal=args.expect_seal)
+    else:
+        result = study_status(args.directory)
+    sys.stdout.write(_json(result))
+    return {"supported_on_fixtures": 0, "falsified_on_fixtures": 1,
+            "invalid_control": 2, "error": 2}.get(result.get("comparison"), 0)
+
+
 def parser() -> argparse.ArgumentParser:
     root = argparse.ArgumentParser(
         prog="paper-falsifier",
@@ -74,6 +92,26 @@ def parser() -> argparse.ArgumentParser:
     test.add_argument("--report", type=Path, help="Write JSON to a new report path")
     test.add_argument("--timeout", type=float, default=15.0, help="Seconds per case, including compilation (default: 15)")
     test.set_defaults(handler=run)
+
+    managed = commands.add_parser("study", help="Create, seal and verify a paper study")
+    stages = managed.add_subparsers(dest="stage", required=True)
+    new = stages.add_parser("new", help="Start an unsealed study from an arXiv link")
+    new.add_argument("reference")
+    new.add_argument("directory", nargs="?", type=Path, help="Default: studies/<arXiv identifier>")
+    seal = stages.add_parser("seal", help="Freeze the protocol, methodology and any reference artifacts")
+    seal.add_argument("directory", type=Path)
+    seal.add_argument("--artifact", action="append", default=[], metavar="RELATIVE_PATH",
+                      help="Additional independent reference, data or plan to hash, repeatable")
+    brief = stages.add_parser("brief", help="Print a candidate handoff that excludes expected outputs")
+    brief.add_argument("directory", type=Path)
+    brief.add_argument("--expect-seal", help="Expected SHA-256 of externally anchored preregistration")
+    verify = stages.add_parser("verify", help="Run the candidate and negative control together")
+    verify.add_argument("directory", type=Path)
+    verify.add_argument("--expect-seal", help="Expected SHA-256 of externally anchored preregistration")
+    verify.add_argument("--timeout", type=float, default=15.0, help="Seconds per case, including compilation")
+    status = stages.add_parser("status", help="Find the next action for an existing study")
+    status.add_argument("directory", type=Path)
+    managed.set_defaults(handler=study)
     return root
 
 

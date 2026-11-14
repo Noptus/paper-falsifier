@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "stage": "sealed",
+  "registered_at_utc": "2026-11-14T22:39:46+00:00",
+  "paper_metadata_sha256": "35492bedd28e5e206cf1d854428e864fcf2a5485fbeb2b73688600758fc7455b",
+  "methodology_sha256": "9d320f9621ad75ad56b2b4de2e155da943a0fda0f5dcf0755acd0321ad54782f",
+  "protocol_sha256": "7c93baeae8bcefb652ee269011e9424a3f5c1a8c63920132ba96f540a71970c6",
+  "paper": {
+    "identifier": "2201.09350v3",
+    "title": "Elementary proofs of several results on false discovery rate",
+    "pdf_sha256": "ac0887a3b11ebc9c8f084582b594d6bd5787e128b53d8c60877fb86fb9de21d0"
+  },
+  "claim": "BH and BY step-up implementations reproduce independent reference rejection counts on the frozen p-value fixtures.",
+  "scope": "Fixtures cover unsorted vectors, ties, zeros, exact equality, step-up behavior and seed-generated data. A separate registered simulation measures FDR under three specified all-null distributions.",
+  "mode": "applicability",
+  "artifacts": {
+    "oracle.py": "77eea928078df8559dfa47cdcba73cd3254de84687d74645b6d35a92cca7f0e2",
+    "study-plan.json": "892405e168f20befdadcba9d14fa02ea7612d246af1127ff559c737fcfe196f3"
+  }
+}

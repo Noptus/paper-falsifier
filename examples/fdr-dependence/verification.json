@@ -1,0 +1,515 @@
+{
+  "schema": 1,
+  "comparison": "supported_on_fixtures",
+  "control_strength": "strong",
+  "timeout": 15.0,
+  "seal_sha256": "c27cc3480a61a76d58f4551867c8a1e3baa54b288c22833b9fb2f94502e0eee4",
+  "protocol_sha256": "7c93baeae8bcefb652ee269011e9424a3f5c1a8c63920132ba96f540a71970c6",
+  "runtime": {
+    "python": "3.13.5",
+    "platform": "Darwin",
+    "machine": "arm64",
+    "wasmtime": "50.0.1"
+  },
+  "candidate": {
+    "schema": 1,
+    "status": "pass",
+    "mode": "applicability",
+    "paper": {
+      "identifier": "2201.09350v3",
+      "title": "Elementary proofs of several results on false discovery rate",
+      "pdf_sha256": "ac0887a3b11ebc9c8f084582b594d6bd5787e128b53d8c60877fb86fb9de21d0"
+    },
+    "claim": "BH and BY step-up implementations reproduce independent reference rejection counts on the frozen p-value fixtures.",
+    "scope": "Fixtures cover unsorted vectors, ties, zeros, exact equality, step-up behavior and seed-generated data. A separate registered simulation measures FDR under three specified all-null distributions.",
+    "references": [
+      {
+        "location": "§2, equation (2) and Theorem 1",
+        "source_claim": "The BH step-up rule selects the maximal rank satisfying the linear threshold."
+      },
+      {
+        "location": "§5, Theorem 4 and Corollary 2",
+        "source_claim": "The arbitrary-dependence bound inflates by the harmonic factor, yielding the BY correction."
+      }
+    ],
+    "protocol_sha256": "7c93baeae8bcefb652ee269011e9424a3f5c1a8c63920132ba96f540a71970c6",
+    "candidate_sha256": "ad69c292643aa57215f71d730eb1eb2c430eef174e585bcddabf755f0100aaf2",
+    "case_count": 20,
+    "results": [
+      {
+        "name": "singleton-exact-threshold",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "no-rejections",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "all-rejections-both-procedures",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          3.0,
+          3.0
+        ]
+      },
+      {
+        "name": "ties-bh-but-not-by",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          2.0,
+          0.0
+        ]
+      },
+      {
+        "name": "last-step-accept-despite-first-miss",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          2.0,
+          0.0
+        ]
+      },
+      {
+        "name": "reversed-unordered",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "name": "minimum-zero",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "edge-p-one",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-4-1",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-4-2",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-4-3",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "name": "seeded-4-4",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "seeded-16-1",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-16-2",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-16-3",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-16-4",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-64-1",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-64-2",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-64-3",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-64-4",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          1.0,
+          1.0
+        ]
+      }
+    ]
+  },
+  "control": {
+    "schema": 1,
+    "status": "fail",
+    "mode": "applicability",
+    "paper": {
+      "identifier": "2201.09350v3",
+      "title": "Elementary proofs of several results on false discovery rate",
+      "pdf_sha256": "ac0887a3b11ebc9c8f084582b594d6bd5787e128b53d8c60877fb86fb9de21d0"
+    },
+    "claim": "BH and BY step-up implementations reproduce independent reference rejection counts on the frozen p-value fixtures.",
+    "scope": "Fixtures cover unsorted vectors, ties, zeros, exact equality, step-up behavior and seed-generated data. A separate registered simulation measures FDR under three specified all-null distributions.",
+    "references": [
+      {
+        "location": "§2, equation (2) and Theorem 1",
+        "source_claim": "The BH step-up rule selects the maximal rank satisfying the linear threshold."
+      },
+      {
+        "location": "§5, Theorem 4 and Corollary 2",
+        "source_claim": "The arbitrary-dependence bound inflates by the harmonic factor, yielding the BY correction."
+      }
+    ],
+    "protocol_sha256": "7c93baeae8bcefb652ee269011e9424a3f5c1a8c63920132ba96f540a71970c6",
+    "candidate_sha256": "d5709265bb5960dfef4190237845f20a779a58e5359aecfc6283f1182d2c1384",
+    "case_count": 20,
+    "results": [
+      {
+        "name": "singleton-exact-threshold",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "no-rejections",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "all-rejections-both-procedures",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          3.0,
+          3.0
+        ]
+      },
+      {
+        "name": "ties-bh-but-not-by",
+        "status": "fail",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [
+          1
+        ],
+        "actual": [
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "name": "last-step-accept-despite-first-miss",
+        "status": "fail",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [
+          1
+        ],
+        "actual": [
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "name": "reversed-unordered",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "name": "minimum-zero",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "edge-p-one",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-4-1",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-4-2",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-4-3",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          2.0,
+          2.0
+        ]
+      },
+      {
+        "name": "seeded-4-4",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "seeded-16-1",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-16-2",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-16-3",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-16-4",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-64-1",
+        "status": "fail",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [
+          1
+        ],
+        "actual": [
+          1.0,
+          1.0
+        ]
+      },
+      {
+        "name": "seeded-64-2",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-64-3",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "name": "seeded-64-4",
+        "status": "pass",
+        "expected_count": 2,
+        "actual_count": 2,
+        "mismatched_indices": [],
+        "actual": [
+          1.0,
+          1.0
+        ]
+      }
+    ]
+  },
+  "run_id": "b0f91f5a04765c08170e418352c73c03b32933b60cf66f7730d75d6dcb3552d3"
+}

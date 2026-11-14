@@ -1,0 +1,506 @@
+{
+  "schema": 1,
+  "paper": "2201.09350v3",
+  "status": "supported_in_registered_simulation",
+  "plan_sha256": "892405e168f20befdadcba9d14fa02ea7612d246af1127ff559c737fcfe196f3",
+  "simulation_sha256": "4632ba361058c7d5d934ff47eb54f36d3526dc8a1f80850cc5a66ea0a8f171de",
+  "reference": {
+    "numpy": "2.2.6",
+    "scipy": "1.16.3",
+    "implementations": [
+      "scipy.stats.false_discovery_control",
+      "scipy.stats.binomtest"
+    ]
+  },
+  "seed": 82109350,
+  "independent_pvalue_families": 1800000,
+  "shared_scenarios_for_bh_and_by": true,
+  "replicates_per_cell": 100000,
+  "family_confidence": 0.95,
+  "simultaneous_interval_count": 36,
+  "interval_method": "Two-sided Clopper-Pearson exact binomial intervals with Bonferroni adjustment over all 36 rates",
+  "primary_comparisons": [
+    {
+      "nominal_level": 0.05,
+      "family_size": 4,
+      "decision": "supports"
+    },
+    {
+      "nominal_level": 0.1,
+      "family_size": 4,
+      "decision": "supports"
+    },
+    {
+      "nominal_level": 0.05,
+      "family_size": 16,
+      "decision": "supports"
+    },
+    {
+      "nominal_level": 0.1,
+      "family_size": 16,
+      "decision": "supports"
+    },
+    {
+      "nominal_level": 0.05,
+      "family_size": 64,
+      "decision": "supports"
+    },
+    {
+      "nominal_level": 0.1,
+      "family_size": 64,
+      "decision": "supports"
+    }
+  ],
+  "cells": [
+    {
+      "regime": "independent",
+      "family_size": 4,
+      "nominal_level": 0.05,
+      "procedures": {
+        "bh": {
+          "rejections": 5096,
+          "estimated_rate": 0.05096,
+          "analytic_rate": 0.05,
+          "simultaneous_interval": [
+            0.048763857839874955,
+            0.05322053062242762
+          ]
+        },
+        "by": {
+          "rejections": 2509,
+          "estimated_rate": 0.02509,
+          "analytic_rate": 0.024,
+          "simultaneous_interval": [
+            0.023537805961099344,
+            0.026710378922051428
+          ]
+        }
+      }
+    },
+    {
+      "regime": "near_bh_bound",
+      "family_size": 4,
+      "nominal_level": 0.05,
+      "procedures": {
+        "bh": {
+          "rejections": 10265,
+          "estimated_rate": 0.10265,
+          "analytic_rate": 0.10312500000000001,
+          "simultaneous_interval": [
+            0.09960518934481194,
+            0.10575173763205527
+          ]
+        },
+        "by": {
+          "rejections": 0,
+          "estimated_rate": 0.0,
+          "analytic_rate": 0.0,
+          "simultaneous_interval": [
+            0.0,
+            7.27213397568245e-05
+          ]
+        }
+      }
+    },
+    {
+      "regime": "near_by_bound",
+      "family_size": 4,
+      "nominal_level": 0.05,
+      "procedures": {
+        "bh": {
+          "rejections": 4884,
+          "estimated_rate": 0.04884,
+          "analytic_rate": 0.0495,
+          "simultaneous_interval": [
+            0.046688313953066156,
+            0.051056382645317325
+          ]
+        },
+        "by": {
+          "rejections": 4884,
+          "estimated_rate": 0.04884,
+          "analytic_rate": 0.0495,
+          "simultaneous_interval": [
+            0.046688313953066156,
+            0.051056382645317325
+          ]
+        }
+      }
+    },
+    {
+      "regime": "independent",
+      "family_size": 4,
+      "nominal_level": 0.1,
+      "procedures": {
+        "bh": {
+          "rejections": 10062,
+          "estimated_rate": 0.10062,
+          "analytic_rate": 0.1,
+          "simultaneous_interval": [
+            0.09760238972054265,
+            0.1036948292568519
+          ]
+        },
+        "by": {
+          "rejections": 4797,
+          "estimated_rate": 0.04797,
+          "analytic_rate": 0.048,
+          "simultaneous_interval": [
+            0.04583688217080249,
+            0.050167940971382725
+          ]
+        }
+      }
+    },
+    {
+      "regime": "near_bh_bound",
+      "family_size": 4,
+      "nominal_level": 0.1,
+      "procedures": {
+        "bh": {
+          "rejections": 20532,
+          "estimated_rate": 0.20532,
+          "analytic_rate": 0.20625000000000002,
+          "simultaneous_interval": [
+            0.20125254038378093,
+            0.2094296532640142
+          ]
+        },
+        "by": {
+          "rejections": 0,
+          "estimated_rate": 0.0,
+          "analytic_rate": 0.0,
+          "simultaneous_interval": [
+            0.0,
+            7.27213397568245e-05
+          ]
+        }
+      }
+    },
+    {
+      "regime": "near_by_bound",
+      "family_size": 4,
+      "nominal_level": 0.1,
+      "procedures": {
+        "bh": {
+          "rejections": 9831,
+          "estimated_rate": 0.09831,
+          "analytic_rate": 0.099,
+          "simultaneous_interval": [
+            0.09532380785723431,
+            0.1013537434573681
+          ]
+        },
+        "by": {
+          "rejections": 9831,
+          "estimated_rate": 0.09831,
+          "analytic_rate": 0.099,
+          "simultaneous_interval": [
+            0.09532380785723431,
+            0.1013537434573681
+          ]
+        }
+      }
+    },
+    {
+      "regime": "independent",
+      "family_size": 16,
+      "nominal_level": 0.05,
+      "procedures": {
+        "bh": {
+          "rejections": 4927,
+          "estimated_rate": 0.04927,
+          "analytic_rate": 0.05,
+          "simultaneous_interval": [
+            0.04710920741093281,
+            0.05149542666309817
+          ]
+        },
+        "by": {
+          "rejections": 1430,
+          "estimated_rate": 0.0143,
+          "analytic_rate": 0.014789709586346976,
+          "simultaneous_interval": [
+            0.013129414158974579,
+            0.015540416797892823
+          ]
+        }
+      }
+    },
+    {
+      "regime": "near_bh_bound",
+      "family_size": 16,
+      "nominal_level": 0.05,
+      "procedures": {
+        "bh": {
+          "rejections": 16775,
+          "estimated_rate": 0.16775,
+          "analytic_rate": 0.16734608516483518,
+          "simultaneous_interval": [
+            0.16399144637996246,
+            0.17155613339271922
+          ]
+        },
+        "by": {
+          "rejections": 0,
+          "estimated_rate": 0.0,
+          "analytic_rate": 0.0,
+          "simultaneous_interval": [
+            0.0,
+            7.27213397568245e-05
+          ]
+        }
+      }
+    },
+    {
+      "regime": "near_by_bound",
+      "family_size": 16,
+      "nominal_level": 0.05,
+      "procedures": {
+        "bh": {
+          "rejections": 4932,
+          "estimated_rate": 0.04932,
+          "analytic_rate": 0.0495,
+          "simultaneous_interval": [
+            0.047158151512857245,
+            0.051546475291771726
+          ]
+        },
+        "by": {
+          "rejections": 4932,
+          "estimated_rate": 0.04932,
+          "analytic_rate": 0.0495,
+          "simultaneous_interval": [
+            0.047158151512857245,
+            0.051546475291771726
+          ]
+        }
+      }
+    },
+    {
+      "regime": "independent",
+      "family_size": 16,
+      "nominal_level": 0.1,
+      "procedures": {
+        "bh": {
+          "rejections": 10254,
+          "estimated_rate": 0.10254,
+          "analytic_rate": 0.1,
+          "simultaneous_interval": [
+            0.09949665362143356,
+            0.10564028917696304
+          ]
+        },
+        "by": {
+          "rejections": 3049,
+          "estimated_rate": 0.03049,
+          "analytic_rate": 0.029579419172693952,
+          "simultaneous_interval": [
+            0.028780400574499303,
+            0.0322669822036491
+          ]
+        }
+      }
+    },
+    {
+      "regime": "near_bh_bound",
+      "family_size": 16,
+      "nominal_level": 0.1,
+      "procedures": {
+        "bh": {
+          "rejections": 33362,
+          "estimated_rate": 0.33362,
+          "analytic_rate": 0.33469217032967036,
+          "simultaneous_interval": [
+            0.32886027891570657,
+            0.3384035382257468
+          ]
+        },
+        "by": {
+          "rejections": 0,
+          "estimated_rate": 0.0,
+          "analytic_rate": 0.0,
+          "simultaneous_interval": [
+            0.0,
+            7.27213397568245e-05
+          ]
+        }
+      }
+    },
+    {
+      "regime": "near_by_bound",
+      "family_size": 16,
+      "nominal_level": 0.1,
+      "procedures": {
+        "bh": {
+          "rejections": 9882,
+          "estimated_rate": 0.09882,
+          "analytic_rate": 0.099,
+          "simultaneous_interval": [
+            0.09582682798675043,
+            0.10187064994894715
+          ]
+        },
+        "by": {
+          "rejections": 9882,
+          "estimated_rate": 0.09882,
+          "analytic_rate": 0.099,
+          "simultaneous_interval": [
+            0.09582682798675043,
+            0.10187064994894715
+          ]
+        }
+      }
+    },
+    {
+      "regime": "independent",
+      "family_size": 64,
+      "nominal_level": 0.05,
+      "procedures": {
+        "bh": {
+          "rejections": 5009,
+          "estimated_rate": 0.05009,
+          "analytic_rate": 0.05,
+          "simultaneous_interval": [
+            0.04791196872769017,
+            0.05233254614957938
+          ]
+        },
+        "by": {
+          "rejections": 1034,
+          "estimated_rate": 0.01034,
+          "analytic_rate": 0.010539871387207002,
+          "simultaneous_interval": [
+            0.009347260253235972,
+            0.011403209998137003
+          ]
+        }
+      }
+    },
+    {
+      "regime": "near_bh_bound",
+      "family_size": 64,
+      "nominal_level": 0.05,
+      "procedures": {
+        "bh": {
+          "rejections": 23462,
+          "estimated_rate": 0.23462,
+          "analytic_rate": 0.23482259973343558,
+          "simultaneous_interval": [
+            0.23035002152906361,
+            0.23892797372915167
+          ]
+        },
+        "by": {
+          "rejections": 0,
+          "estimated_rate": 0.0,
+          "analytic_rate": 0.0,
+          "simultaneous_interval": [
+            0.0,
+            7.27213397568245e-05
+          ]
+        }
+      }
+    },
+    {
+      "regime": "near_by_bound",
+      "family_size": 64,
+      "nominal_level": 0.05,
+      "procedures": {
+        "bh": {
+          "rejections": 4936,
+          "estimated_rate": 0.04936,
+          "analytic_rate": 0.0495,
+          "simultaneous_interval": [
+            0.04719730724256481,
+            0.05158731374663004
+          ]
+        },
+        "by": {
+          "rejections": 4936,
+          "estimated_rate": 0.04936,
+          "analytic_rate": 0.0495,
+          "simultaneous_interval": [
+            0.04719730724256481,
+            0.05158731374663004
+          ]
+        }
+      }
+    },
+    {
+      "regime": "independent",
+      "family_size": 64,
+      "nominal_level": 0.1,
+      "procedures": {
+        "bh": {
+          "rejections": 9910,
+          "estimated_rate": 0.0991,
+          "analytic_rate": 0.1,
+          "simultaneous_interval": [
+            0.09610300642961223,
+            0.10215443122103164
+          ]
+        },
+        "by": {
+          "rejections": 2165,
+          "estimated_rate": 0.02165,
+          "analytic_rate": 0.021079742774414004,
+          "simultaneous_interval": [
+            0.020207840156891373,
+            0.023160861133467953
+          ]
+        }
+      }
+    },
+    {
+      "regime": "near_bh_bound",
+      "family_size": 64,
+      "nominal_level": 0.1,
+      "procedures": {
+        "bh": {
+          "rejections": 47107,
+          "estimated_rate": 0.47107,
+          "analytic_rate": 0.46964519946687117,
+          "simultaneous_interval": [
+            0.46602085832497697,
+            0.4761232826373584
+          ]
+        },
+        "by": {
+          "rejections": 0,
+          "estimated_rate": 0.0,
+          "analytic_rate": 0.0,
+          "simultaneous_interval": [
+            0.0,
+            7.27213397568245e-05
+          ]
+        }
+      }
+    },
+    {
+      "regime": "near_by_bound",
+      "family_size": 64,
+      "nominal_level": 0.1,
+      "procedures": {
+        "bh": {
+          "rejections": 9998,
+          "estimated_rate": 0.09998,
+          "analytic_rate": 0.099,
+          "simultaneous_interval": [
+            0.09697104404621121,
+            0.10304626700066044
+          ]
+        },
+        "by": {
+          "rejections": 9998,
+          "estimated_rate": 0.09998,
+          "analytic_rate": 0.099,
+          "simultaneous_interval": [
+            0.09697104404621121,
+            0.10304626700066044
+          ]
+        }
+      }
+    }
+  ]
+}

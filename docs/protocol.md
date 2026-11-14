@@ -39,3 +39,32 @@ The CLI emits JSON with the paper identity, declared mode, references, candidate
 The protocol hash covers file bytes, so whitespace edits change it. When publishing, pair the report with its independently recorded hash and use --paper to verify the source bytes.
 
 On busy machines, use `--timeout` to raise the per-case wall clock cap up to 30 seconds. The default is 15 seconds, including worker startup and compilation.
+
+## Managed study
+
+A managed study keeps the protocol, methodology, source PDF, guests and receipts in one directory and moves them through four stages.
+
+| Stage | Command | Effect |
+| --- | --- | --- |
+| new | `study new <link> <dir>` | Fetch and pin the paper and write draft `protocol.json` and `methodology.md` |
+| seal | `study seal <dir>` | Hash the protocol, methodology and any artifacts into an immutable `preregistration.json` |
+| brief | `study brief <dir>` | Emit the author handoff with claim, scope, citations and ABI and without expected vectors |
+| verify | `study verify <dir>` | Run `candidate.wat` and `negative-control.wat` and append a run receipt |
+
+`study status <dir>` reports the current stage and the next action.
+
+Seal refuses to proceed while `protocol.json` holds a TODO placeholder, while the methodology note is empty or still has a TODO, or while either guest already occupies its reserved path. Add `--artifact <relative-path>`, repeatable up to twelve distinct entries, to bind an independent reference, dataset or plan by SHA-256. Each artifact path stays inside the study and avoids the reserved names. The seal is written once and is immutable through this workflow, so a protocol revision uses a fresh directory.
+
+The seal digest proves that the on-disk protocol, methodology and artifacts match what was sealed. An externally timestamped preregistration proves that the plan predated the result. To gain the second property, anchor the seal digest to an independent timestamp before implementation. Pass `--expect-seal <digest>` to `brief` and `verify` to bind the action to that anchored digest.
+
+The brief withholds every expected vector and the oracle so the author stays blind to the outcome. Keep candidate authoring in a separate context. A fix or refit invalidates the sealed holdout, so open a fresh study on a new unseen holdout, disclose the change independently and reseal.
+
+Verify compares the candidate against the control and grades the control strength. A control is useful only when it differs from the candidate, returns the expected output shape and fails through a genuine numeric mismatch. Receipts are append-only and named by a content digest, so a reproduced run with identical outputs coexists with an earlier one and a differing reproduction is rejected.
+
+- `supported_on_fixtures` (exit 0) means the candidate passed and the control failed meaningfully.
+- `falsified_on_fixtures` (exit 1) means the candidate failed against the frozen vectors.
+- `invalid_control` or `error` (exit 2) means the control was too weak or a run could not complete.
+
+A supported study is evidence for the stated population and assumptions on its fixtures. A simulation study supports the registered construction and is never a proof of a general theorem.
+
+A managed study accepts one guest for each of `candidate` and `negative-control`, each with a `.wat` or `.wasm` suffix. Use an existing compiler for trusted local numeric code, then verify the resulting module against the same zero-import ABI.

@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "claim": "BH inflates all-null rejection under the specified dependent joint law while BY controls it",
+  "paper": "2201.09350v3",
+  "independent_unit": "a complete p-value family; all hypotheses in each family are null",
+  "family_sizes": [4, 16, 64],
+  "nominal_levels": [0.05, 0.1],
+  "regimes": ["independent", "near_bh_bound", "near_by_bound"],
+  "procedures": ["bh", "by"],
+  "replicates_per_cell": 100000,
+  "seed": 82109350,
+  "near_boundary_factor": 0.99,
+  "family_alpha": 0.05,
+  "interval": "Two-sided Clopper-Pearson exact binomial intervals with Bonferroni adjustment over all 36 rates",
+  "primary_decision": "In every near_bh_bound cell, the BH interval lower limit exceeds the nominal level and the BY interval upper limit is below it",
+  "reference": {
+    "numpy": "2.2.6",
+    "scipy": "1.16.3",
+    "implementations": ["scipy.stats.false_discovery_control", "scipy.stats.binomtest"]
+  }
+}

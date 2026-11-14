@@ -10,6 +10,8 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
+from . import __version__
+
 ID = re.compile(r"(?:\d{4}\.\d{4,5}|[a-z][a-z0-9.-]*/\d{7})(?:v[1-9]\d*)?", re.ASCII)
 VERSION = re.compile(r"v[1-9]\d*$")
 HOSTS = {"arxiv.org", "www.arxiv.org", "export.arxiv.org"}
@@ -77,7 +79,7 @@ class ArxivRedirects(HTTPRedirectHandler):
 
 
 def _download(url: str, maximum: int) -> bytes:
-    request = Request(url, headers={"User-Agent": "PaperFalsifier/0.1 (interactive research retrieval)"})
+    request = Request(url, headers={"User-Agent": f"PaperFalsifier/{__version__} (interactive research retrieval)"})
     try:
         with build_opener(ArxivRedirects).open(request, timeout=25) as response:
             data = response.read(maximum + 1)

@@ -25,7 +25,7 @@ jobs:
       - name: Reproduce the paper examples
         shell: bash
         run: |
-          for example in examples/temperature-scaling examples/split-conformal; do
+          for example in examples/temperature-scaling examples/split-conformal examples/fdr-dependence; do
             protocol_sha=$(paper-falsifier freeze "$example/protocol.json")
             test "$protocol_sha" = "$(cat "$example/protocol.sha256")"
             paper-falsifier run "$example/protocol.json" "$example/candidate.wat" --expect-sha "$protocol_sha"
@@ -33,3 +33,34 @@ jobs:
             paper-falsifier run "$example/protocol.json" "$example/negative-control.wat" --expect-sha "$protocol_sha" || code=$?
             test "$code" = 1
           done
+
+  scientific-replay:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install numpy==2.2.6 scipy==1.16.3
+      - name: Regenerate the independent oracle and test registered results
+        shell: bash
+        run: |
+          example=examples/fdr-dependence
+          python "$example/oracle.py" > /tmp/oracle-protocol.json
+          cmp "$example/protocol.json" /tmp/oracle-protocol.json
+          python "$example/simulation.py" > /tmp/replayed-simulation.json
+          python - "$example/simulation-result.json" /tmp/replayed-simulation.json <<'PYTHON'
+          import json
+          import sys
+          from pathlib import Path
+
+          frozen, replayed = (json.loads(Path(path).read_text()) for path in sys.argv[1:])
+          assert frozen["status"] == replayed["status"] == "supported_in_registered_simulation"
+          assert frozen["plan_sha256"] == replayed["plan_sha256"]
+          assert frozen["simulation_sha256"] == replayed["simulation_sha256"]
+          for a, b in zip(frozen["cells"], replayed["cells"], strict=True):
+              for key in ("regime", "family_size", "nominal_level"):
+                  assert a[key] == b[key]
+              for procedure in ("bh", "by"):
+                  assert a["procedures"][procedure]["rejections"] == b["procedures"][procedure]["rejections"]
+          PYTHON
